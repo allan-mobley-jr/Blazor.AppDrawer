@@ -38,7 +38,7 @@ dotnet add package Mobsites.Blazor.MaterialDesign.AppDrawer --version 1.0.0-prev
 2. Add the following markup to the `MainLayout.razor` file (ideally):
 
 ```html
-<!-- Add optional app bar here or below or no -->
+<!-- Add optional app bar here or below -->
 <AppDrawer ModalOnly="true">
     <!-- The header is optional. Place outside of <AppDrawerContent></AppDrawerContent> to avoid scrolling. -->
     <AppDrawerHeader>
@@ -64,3 +64,18 @@ dotnet add package Mobsites.Blazor.MaterialDesign.AppDrawer --version 1.0.0-prev
     </MainContent>
 </AppContent>
 ```
+
+***Note the flag set on `<AppDrawer ModalOnly="true">`. For responsive mode, set to `false` or leave attribute off altogether.***
+
+3. Add `Blazor TopAppBar` component or custom app bar (shown below). This can be placed above `<AppDrawer></AppDrawer>` element or inside `<AppContent></AppContent>` element:
+
+```html
+<div class="app-bar">
+    <button class="app-drawer-button mr-auto" >
+        <span class="oi oi-menu"></span>
+    </button>
+    <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+</div>
+```
+
+***Note the use of the two css classes `.app-bar` and `.app-drawer-button` above. The latter class is wired up to toggle the drawer on button click. Neither class is necessary when using `Blazor TopAppBar`.***
