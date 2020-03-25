@@ -1,6 +1,6 @@
 @inherits LayoutComponentBase
 
-<AppDrawer @ref="@appDrawer" Class="blazor-drawer-bg">
+<AppDrawer Class="blazor-drawer-bg">
     <AppDrawerHeader Class="blazor-drawer-header-bg">
         <img src="/blazor.png" width="192" height="192" />
         <AppDrawerHeaderTitle Class="text-light">Blazor AppDrawer</AppDrawerHeaderTitle>
@@ -37,7 +37,3 @@
         @Body
     </MainContent>
 </AppContent>
-
-@code {
-    AppDrawer appDrawer;
-}

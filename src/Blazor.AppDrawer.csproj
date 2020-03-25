@@ -10,7 +10,7 @@
     <Company>Mobsites</Company>
     <Authors>Allan Mobley</Authors>
     <Copyright>© 2020 Mobsites</Copyright>
-    <Description>Blazor component that implements Google's Material Design App Drawer.</Description>
+    <Description>Blazor component library that implements a subset of Google's MDC Navigation Drawer and is used to organize access to destinations and other functionality on an app.</Description>
     <PackageId>Mobsites.Blazor.MaterialDesign.AppDrawer</PackageId>
     <IsPackable>true</IsPackable>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>

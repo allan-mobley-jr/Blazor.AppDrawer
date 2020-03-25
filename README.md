@@ -19,3 +19,48 @@ The design and development of this component library was heavily guided by Steve
 As for the non-C# implementation of this component library, obviously Google's MDC Navigation Drawer [docs](https://material.io/develop/web/components/drawers/) were consulted.
 
 After much thought, the full implementation of Google's MDC Navigation Drawer was (for now) decided against in favor of a mobile-first approach. The dismissible and permanent variants were left out, and only the modal variant and a hybrid variant called responsive made it in. (The responsive being the modal and fixed variants combined, transition occurring on a responsive media breakpoint.
+
+Also, unlike some of the other MDC drawer components out there for Blazor, this one was designed without the need to wire up an onclick event handler or a callback function for toggling of the drawer in modal mode. The component works seamlessly with `Blazor TopAppBar`, or, as the samples demonstrate, by simply applying a couple of css classes.
+
+## Getting Started
+1. Install via [Nuget.org](https://www.nuget.org/packages/Mobsites.Blazor.MaterialDesign.AppDrawer/)
+
+```shell
+Install-Package Mobsites.Blazor.MaterialDesign.AppDrawer -Version 1.0.0-preview1
+```
+
+or
+
+```shell
+dotnet add package Mobsites.Blazor.MaterialDesign.AppDrawer --version 1.0.0-preview1
+```
+
+2. Add the following markup to the `MainLayout.razor` file (ideally):
+
+```html
+<!-- Add optional app bar here or below or no -->
+<AppDrawer ModalOnly="true">
+    <!-- The header is optional. Place outside of <AppDrawerContent></AppDrawerContent> to avoid scrolling. -->
+    <AppDrawerHeader>
+        <!-- All child tags are optional -->
+        <img src="" width="192" height="192" />
+        <AppDrawerHeaderTitle Class="text-light"><!-- Add text --></AppDrawerHeaderTitle>
+        <AppDrawerHeaderSubtitle Class="text-light"><!-- Add text --></AppDrawerHeaderSubtitle>
+    </AppDrawerHeader>
+    <!-- Required -->
+    <AppDrawerContent>
+        <!-- Add navigation content or app functionality here -->
+        <!-- Scrollable content (separate from scrollable content in <MainContent></MainContent>)  -->
+    </AppDrawerContent>
+</AppDrawer>
+<!-- Required for responsive mode, recommended for modal only mode -->
+<AppContent>
+
+    <!-- Add optional app bar here (be sure to set <AppContent ContainsAppBar="true"> above) -->
+
+    <!-- Scrollable content (separate from scrollable content in <AppDrawerContent></AppDrawerContent>)  -->
+    <MainContent>
+        <!-- typically @Body -->
+    </MainContent>
+</AppContent>
+```
