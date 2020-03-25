@@ -20,7 +20,7 @@ As for the non-C# implementation of this component library, obviously Google's M
 
 After much thought, the full implementation of Google's MDC Navigation Drawer was (for now) decided against in favor of a mobile-first approach. As a result, the dismissible and permanent variants were left out, and only the modal variant and a hybrid variant called responsive made it in. (The responsive being the modal and fixed variants combined, transition occurring on a responsive media breakpoint.
 
-Also, unlike some of the other MDC drawer components out there for Blazor, this one was designed without requiring the use to wire up an onclick event handler or a callback function for toggling of the drawer in modal mode. The component works seamlessly with `Blazor TopAppBar`, or, as the samples demonstrate, by simply applying a couple of css classes.
+Also, unlike some of the other MDC drawer components out there for Blazor, this one was designed without requiring the user to wire up an onclick event handler or a callback function for toggling of the drawer in modal mode. The component works seamlessly with `Blazor TopAppBar`, or, as the samples demonstrate, by simply applying a couple of css classes.
 
 ## Getting Started
 1. Install [Nuget](https://www.nuget.org/packages/Mobsites.Blazor.MaterialDesign.AppDrawer/):
