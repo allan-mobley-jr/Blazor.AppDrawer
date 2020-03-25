@@ -41,7 +41,13 @@ dotnet add package Mobsites.Blazor.MaterialDesign.AppDrawer --version 1.0.0-prev
 <script src="_content/Mobsites.Blazor.MaterialDesign.AppDrawer/bundle.js"></script>
 ```
 
-4. Add the following markup to the `MainLayout.razor` file (ideally):
+4. Add the following using statement to the `_Imports.razor` file:
+
+```html
+@using Blazor.MaterialDesign.Components
+```
+
+5. Add the following markup to the `MainLayout.razor` file (ideally):
 
 ```html
 <!-- Add optional app bar here or below -->
@@ -73,7 +79,7 @@ dotnet add package Mobsites.Blazor.MaterialDesign.AppDrawer --version 1.0.0-prev
 
 ***Note the flag set on `<AppDrawer ModalOnly="true">`. For responsive mode, set to `false` or leave attribute off altogether.***
 
-5. Add `Blazor TopAppBar` component or custom app bar (shown below). This can be placed above the `<AppDrawer></AppDrawer>` element or inside the `<AppContent></AppContent>` element:
+6. Add `Blazor TopAppBar` component or custom app bar (shown below). This can be placed above the `<AppDrawer></AppDrawer>` element or inside the `<AppContent></AppContent>` element:
 
 ```html
 <div class="app-bar">
@@ -85,6 +91,9 @@ dotnet add package Mobsites.Blazor.MaterialDesign.AppDrawer --version 1.0.0-prev
 ```
 
 ***Note the use of the two css classes `.app-bar` and `.app-drawer-button` above. The latter class is wired up to toggle the drawer on button click. Neither class is necessary when using `Blazor TopAppBar`.***
+
+## Responsive Mode Breakpoint
+The `<AppDrawer>` element has an attribute of the name `ResponsiveBreakpoint` that accepts an integer value. The default and absolute minimum is 900 (in pixels). Anything above that will change the responsive mode media breakpoint at which the component transitions between a modal state and a fixed state. Anything below that will be ignored.
 
 ## Possible CSS Styling Conflicts
 
