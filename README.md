@@ -23,19 +23,25 @@ After much thought, the full implementation of Google's MDC Navigation Drawer wa
 Also, unlike some of the other MDC drawer components out there for Blazor, this one was designed without the need to wire up an onclick event handler or a callback function for toggling of the drawer in modal mode. The component works seamlessly with `Blazor TopAppBar`, or, as the samples demonstrate, by simply applying a couple of css classes.
 
 ## Getting Started
-1. Install via [Nuget.org](https://www.nuget.org/packages/Mobsites.Blazor.MaterialDesign.AppDrawer/)
-
-```shell
-Install-Package Mobsites.Blazor.MaterialDesign.AppDrawer -Version 1.0.0-preview1
-```
-
-or
+1. Install [Nuget](https://www.nuget.org/packages/Mobsites.Blazor.MaterialDesign.AppDrawer/):
 
 ```shell
 dotnet add package Mobsites.Blazor.MaterialDesign.AppDrawer --version 1.0.0-preview1
 ```
 
-2. Add the following markup to the `MainLayout.razor` file (ideally):
+2. Add the following link tag to `index.html` (webassembly) or `_Host.cshtml` (server) just above the closing `</head>` tag along with your other link tags:
+
+```html
+<link href="_content/Mobsites.Blazor.MaterialDesign.AppDrawer/bundle.css" rel="stylesheet" />
+```
+
+3. Add the following script tag to `index.html` (webassembly) or `_Host.cshtml` (server) just above the closing `</body>` tag along with your other script tags:
+
+```html
+<script src="_content/Mobsites.Blazor.MaterialDesign.AppDrawer/bundle.js"></script>
+```
+
+4. Add the following markup to the `MainLayout.razor` file (ideally):
 
 ```html
 <!-- Add optional app bar here or below -->
@@ -67,7 +73,7 @@ dotnet add package Mobsites.Blazor.MaterialDesign.AppDrawer --version 1.0.0-prev
 
 ***Note the flag set on `<AppDrawer ModalOnly="true">`. For responsive mode, set to `false` or leave attribute off altogether.***
 
-3. Add `Blazor TopAppBar` component or custom app bar (shown below). This can be placed above `<AppDrawer></AppDrawer>` element or inside `<AppContent></AppContent>` element:
+5. Add `Blazor TopAppBar` component or custom app bar (shown below). This can be placed above `<AppDrawer></AppDrawer>` element or inside `<AppContent></AppContent>` element:
 
 ```html
 <div class="app-bar">
@@ -79,3 +85,41 @@ dotnet add package Mobsites.Blazor.MaterialDesign.AppDrawer --version 1.0.0-prev
 ```
 
 ***Note the use of the two css classes `.app-bar` and `.app-drawer-button` above. The latter class is wired up to toggle the drawer on button click. Neither class is necessary when using `Blazor TopAppBar`.***
+
+## Possible CSS Styling Conflicts
+
+This component defaults to the below css style rules, which may conflict with what you already have in place. These styles are necessary for the responsive mode to work properly. Modal drawers are elevated above most of the app’s UI and generally don’t affect the screen’s layout grid, so you should be able to get by if changing any of these defaults when using the modal only mode.
+
+```css
+body {
+    display: flex;
+    height: 100vh;
+}
+
+app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+  
+.mdc-drawer-app-content {
+    flex: auto;
+    overflow: auto;
+    position: relative;
+}
+
+.main-content {
+    overflow: auto;
+    height: 100%;
+    padding-left: 2rem !important;
+    padding-right: 1.5rem !important;
+    padding-top: 4.5rem;
+}
+
+@media (min-width: 768px) {
+    app {
+        flex-direction: row;
+    }
+}
+```
