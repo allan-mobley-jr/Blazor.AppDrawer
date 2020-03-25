@@ -73,7 +73,7 @@ dotnet add package Mobsites.Blazor.MaterialDesign.AppDrawer --version 1.0.0-prev
 
 ***Note the flag set on `<AppDrawer ModalOnly="true">`. For responsive mode, set to `false` or leave attribute off altogether.***
 
-5. Add `Blazor TopAppBar` component or custom app bar (shown below). This can be placed above `<AppDrawer></AppDrawer>` element or inside `<AppContent></AppContent>` element:
+5. Add `Blazor TopAppBar` component or custom app bar (shown below). This can be placed above the `<AppDrawer></AppDrawer>` element or inside the `<AppContent></AppContent>` element:
 
 ```html
 <div class="app-bar">
