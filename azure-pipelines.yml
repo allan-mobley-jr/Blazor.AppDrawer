@@ -1,0 +1,52 @@
+# Copyright (c) 2020 Allan Mobley. All rights reserved.
+# Licensed under the MIT License. See License.txt in the project root for license information.
+
+trigger:
+  tags:
+    include:
+    - v*
+  
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  projectPath: 'src/Blazor.AppDrawer.csproj'
+
+steps:
+
+# Specify a particular version of the .NET SDK
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk'
+  inputs:
+    packageType: sdk
+    version: 3.1.200
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+# Build the solution. Not strictly required to create the package,
+# but we want the pipeline to fail if any solution build fails.
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    configuration: --configuration $(configuration)
+    projects: $(projectPath)
+
+# Create the NuGet package file
+- task: DotNetCoreCLI@2
+  displayName: Pack
+  inputs:
+    command: pack
+    arguments: --configuration $(configuration)
+    packagesToPack: $(projectPath)
+    nobuild: true
+
+# Upload the NuGet package file to nuget.org
+- task: NuGetCommand@2
+  displayName: Push
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: external
+    publishFeedCredentials: Mobsites Nuget
+    allowPackageConflicts: true

@@ -1,0 +1,12 @@
+<main id="main-content" class="main-content @Class" @attributes="@ExtraAttributes">
+    @if (Parent.ContainsAppBar)
+    {   
+        <div class="mdc-top-app-bar--fixed-adjust">
+            @ChildContent
+        </div>
+    }
+    else
+    {
+        @ChildContent
+    }
+</main>
