@@ -9,10 +9,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  buildConfiguration: 'Release'
-  projectPath: 'src/Blazor.AppDrawer.csproj'
-
 steps:
 
 # Specify a particular version of the .NET SDK
@@ -24,29 +20,21 @@ steps:
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
 # Build the solution. Not strictly required to create the package,
-# but we want the pipeline to fail if any solution build fails.
-- task: DotNetCoreCLI@2
+# but we want the pipeline to fail if this step fails.
+- script: dotnet build --configuration Release
+  workingDirectory: src
   displayName: Build
-  inputs:
-    command: build
-    configuration: --configuration $(configuration)
-    projects: $(projectPath)
 
 # Create the NuGet package file
-- task: DotNetCoreCLI@2
+- script: dotnet pack --configuration Release
+  workingDirectory: src
   displayName: Pack
-  inputs:
-    command: pack
-    arguments: --configuration $(configuration)
-    packagesToPack: $(projectPath)
-    nobuild: true
 
 # Upload the NuGet package file to nuget.org
 - task: NuGetCommand@2
   displayName: Push
   inputs:
     command: push
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: 'src/bin/Release/*.nupkg'
     nuGetFeedType: external
-    publishFeedCredentials: Mobsites Nuget
-    allowPackageConflicts: true
+    publishFeedCredentials: 'Blazor AppDrawer'

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 
-namespace Blazor.MaterialDesign.Components
+namespace Mobsites.Blazor.MaterialDesign.Components
 {
     /// <summary>
     /// Blazor component for adding scrollable main content when using the <see cref="AppContent"/> component in conjunction with the <see cref="AppDrawer"/> component.
