@@ -33,13 +33,11 @@ steps:
 - script: dotnet pack --configuration $(buildConfiguration)
   workingDirectory: src
   displayName: Pack
-
-  # Save build artifact
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: src
-    ArtifactName: 'artifacts'
-    publishLocation: 'Container'
+    PathtoPublish: artifacts
+    ArtifactName: artifacts
+    publishLocation: Container
 
 # Upload the NuGet package file to nuget.org
 - task: NuGetCommand@2
