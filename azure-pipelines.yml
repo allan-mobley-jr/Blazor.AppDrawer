@@ -29,7 +29,7 @@ steps:
   displayName: Build
   inputs:
     command: build
-    configuration: --configuration $(configuration)
+    configuration: --configuration $(buildConfiguration)
     projects: $(projectPath)
 
 # Create the NuGet package file
@@ -37,7 +37,7 @@ steps:
   displayName: Pack
   inputs:
     command: pack
-    arguments: --configuration $(configuration)
+    arguments: --configuration $(buildConfiguration)
     packagesToPack: $(projectPath)
     nobuild: true
 
