@@ -9,10 +9,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  buildConfiguration: 'Release'
-  projectPath: 'src/Blazor.AppDrawer.csproj'
-
 steps:
 
 # Specify a particular version of the .NET SDK
@@ -24,7 +20,7 @@ steps:
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
 # Build the solution. Not strictly required to create the package,
-# but we want the pipeline to fail if any solution build fails.
+# but we want the pipeline to fail if this step fails.
 - script: dotnet build --configuration Release
   workingDirectory: src
   displayName: Build

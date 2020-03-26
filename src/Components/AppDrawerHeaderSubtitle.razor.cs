@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 
-namespace Blazor.MaterialDesign.Components
+namespace Mobsites.Blazor.MaterialDesign.Components
 {
     /// <summary>
     /// Blazor child component for adding a subtitle to the <see cref="AppDrawerHeader"/> component.

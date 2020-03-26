@@ -6,7 +6,7 @@ using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Blazor.MaterialDesign.Components
+namespace Mobsites.Blazor.MaterialDesign.Components
 {
     /// <summary>
     /// The Blazor AppDrawer component implements Google's MDC Navigation Drawer 
