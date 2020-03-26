@@ -35,7 +35,7 @@ steps:
   displayName: Pack
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: artifacts
+    PathtoPublish: './artifacts'
     ArtifactName: artifacts
     publishLocation: Container
 
