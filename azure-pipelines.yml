@@ -25,19 +25,14 @@ steps:
 
 # Build the solution. Not strictly required to create the package,
 # but we want the pipeline to fail if any solution build fails.
-- script: dotnet build --configuration $(buildConfiguration)
+- script: dotnet build --configuration Release
   workingDirectory: src
   displayName: Build
 
 # Create the NuGet package file
-- script: dotnet pack --configuration $(buildConfiguration)
+- script: dotnet pack --configuration Release
   workingDirectory: src
   displayName: Pack
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: './artifacts'
-    ArtifactName: artifacts
-    publishLocation: Container
 
 # Upload the NuGet package file to nuget.org
 - task: NuGetCommand@2
@@ -45,7 +40,7 @@ steps:
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     command: push
-    packagesToPush: 'src/*.nupkg'
+    packagesToPush: 'src/bin/Release/*.nupkg'
     nuGetFeedType: external
     publishFeedCredentials: 'Blazor AppDrawer'
     allowPackageConflicts: true
