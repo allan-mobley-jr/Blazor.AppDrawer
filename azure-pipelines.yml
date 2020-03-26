@@ -34,19 +34,13 @@ steps:
   workingDirectory: src
   displayName: Pack
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: 'src/artifacts'
-    ArtifactName: 'artifacts'
-    publishLocation: 'Container'
-
 # Upload the NuGet package file to nuget.org
 - task: NuGetCommand@2
   displayName: Push
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     command: push
-    packagesToPush: 'src/artifacts/*.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: external
     publishFeedCredentials: 'Blazor AppDrawer'
     allowPackageConflicts: true
