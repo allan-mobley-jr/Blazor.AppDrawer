@@ -25,28 +25,28 @@ steps:
 
 # Build the solution. Not strictly required to create the package,
 # but we want the pipeline to fail if any solution build fails.
-- task: DotNetCoreCLI@2
+- script: dotnet build --configuration $(buildConfiguration)
+  workingDirectory: src
   displayName: Build
-  inputs:
-    command: build
-    configuration: --configuration $(buildConfiguration)
-    projects: $(projectPath)
 
 # Create the NuGet package file
-- task: DotNetCoreCLI@2
+- script: dotnet pack --configuration $(buildConfiguration)
+  workingDirectory: src
   displayName: Pack
+
+- task: PublishBuildArtifacts@1
   inputs:
-    command: pack
-    arguments: --configuration $(buildConfiguration)
-    packagesToPack: $(projectPath)
-    nobuild: true
+    PathtoPublish: 'src/artifacts'
+    ArtifactName: 'artifacts'
+    publishLocation: 'Container'
 
 # Upload the NuGet package file to nuget.org
 - task: NuGetCommand@2
   displayName: Push
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     command: push
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: 'src/artifacts/*.nupkg'
     nuGetFeedType: external
-    publishFeedCredentials: Blazor AppDrawer
+    publishFeedCredentials: 'Blazor AppDrawer'
     allowPackageConflicts: true
